@@ -35,8 +35,10 @@ public class Customer {
 
     public Customer() {}
 
-    public Customer(String name){
+    public Customer(String name, String password){
+
         this.name = name;
+        this.password = password;
     }
 
     @JsonIgnore
@@ -78,6 +80,18 @@ public class Customer {
     public void setName(String name) {
 
         this.name = name;
+    }
+
+    public String getPassword() {
+        return password;
+    }
+
+    public void setPassword(String password) {
+        this.password = password;
+    }
+
+    public Set<Order> getOrders() {
+        return orders;
     }
 
     public void setOrders(Set<Order> orders) {

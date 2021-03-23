@@ -11,6 +11,7 @@ import org.springframework.security.crypto.factory.PasswordEncoderFactories;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.web.WebAttributes;
 import org.springframework.security.web.authentication.logout.HttpStatusReturningLogoutSuccessHandler;
+
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
@@ -38,9 +39,10 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
     @Override
     protected void configure(HttpSecurity http) throws Exception {
 
-        http.headers().frameOptions().disable();
+        http.headers().frameOptions().disable(); //<--- Para que se pueda ver la BD /h2-console
         http.authorizeRequests()
-                .antMatchers("/api/**").permitAll()
+                .antMatchers("/web/**", "/api/**").permitAll()
+                .antMatchers("/rest/**").hasAnyAuthority("user")
                 .anyRequest().permitAll();
 
         http.formLogin()

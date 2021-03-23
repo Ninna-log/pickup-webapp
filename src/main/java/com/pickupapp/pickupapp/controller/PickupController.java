@@ -3,9 +3,11 @@ package com.pickupapp.pickupapp.controller;
 import com.pickupapp.pickupapp.model.*;
 import com.pickupapp.pickupapp.repositories.*;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
+import org.springframework.security.crypto.password.PasswordEncoder;
+import org.springframework.web.bind.annotation.*;
+
 import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
@@ -15,6 +17,8 @@ import java.util.stream.Collectors;
 @RequestMapping("/api/v1")
 public class PickupController {
 
+    @Autowired
+    private PasswordEncoder passwordEncoder;
     @Autowired
     private CustomerRepository customerRepository;
     @Autowired
@@ -44,20 +48,20 @@ public class PickupController {
         return customerProductRepository.findAll();
     }*/
 
-    /*@PostMapping("/users")
-    public ResponseEntity<Object> register(@RequestParam String username, @RequestParam String password) {
+    @PostMapping("/users")
+    public ResponseEntity<Object> register(@RequestParam String name, @RequestParam String password) {
 
-        if (username.isEmpty() || password.isEmpty()) {
+        if (name.isEmpty() || password.isEmpty()) {
             return new ResponseEntity<>(AppMessages.MSG_MISSING_DATA, HttpStatus.FORBIDDEN);
         }
 
-        if (playerRepository.findByUserName(username) != null) {
+        if (customerRepository.findByUserName(name) != null) {
             return new ResponseEntity<>(AppMessages.MSG_NAME_ALREADY_USED, HttpStatus.FORBIDDEN);
         }
 
-        playerRepository.save(new Player(username, passwordEncoder.encode(password)));
+        customerRepository.save(new Customer(name, passwordEncoder.encode(password)));
         return new ResponseEntity<>(HttpStatus.CREATED);
-    }*/
+    }
 
     @GetMapping("/orders")
     public List<Map<String, Object>> getProducts(){

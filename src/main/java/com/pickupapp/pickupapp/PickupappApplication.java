@@ -2,16 +2,21 @@ package com.pickupapp.pickupapp;
 
 import com.pickupapp.pickupapp.model.*;
 import com.pickupapp.pickupapp.repositories.*;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.annotation.Bean;
+import org.springframework.security.crypto.password.PasswordEncoder;
 
 import java.time.LocalDate;
 import java.time.LocalTime;
 
 @SpringBootApplication
 public class PickupappApplication {
+
+	@Autowired
+	private PasswordEncoder passwordEncoder;
 
 	public static void main(String[] args) {
 
@@ -20,13 +25,14 @@ public class PickupappApplication {
 
 	@Bean
 	public CommandLineRunner initData(CustomerRepository customerRepository, OrderRepository orderRepository,
-									  ProductRepository productRepository, CustomerProductRepository customerProductRepository) {
+									  ProductRepository productRepository, CustomerProductRepository customerProductRepository,
+									  PasswordEncoder passwordEncoder) {
 		return (args) -> {
 
-			Customer customer1 = new Customer("Gianinna Marquez");
-			Customer customer2 = new Customer("Thairy Daza");
-			Customer customer3 = new Customer("Pedro Perez");
-			Customer customer4 = new Customer("Maria Diaz");
+			Customer customer1 = new Customer("Gianinna Marquez", passwordEncoder.encode("123"));
+			Customer customer2 = new Customer("Pablo Perez", passwordEncoder.encode("123"));
+			Customer customer3 = new Customer("Pedro Perez", passwordEncoder.encode("123"));
+			Customer customer4 = new Customer("Maria Diaz", passwordEncoder.encode("123"));
 
 			customerRepository.save(customer2);
 			customerRepository.save(customer1);

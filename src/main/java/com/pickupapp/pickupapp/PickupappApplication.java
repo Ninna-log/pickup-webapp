@@ -27,10 +27,10 @@ public class PickupappApplication {
 									  ProductRepository productRepository, CustomerProductRepository customerProductRepository) {
 		return (args) -> {
 
-			Customer customer1 = new Customer("Gianinna Marquez", passwordEncoder.encode("24"));
-			Customer customer2 = new Customer("Pablo Perez", passwordEncoder.encode("24"));
-			Customer customer3 = new Customer("Pedro Perez", passwordEncoder.encode("24"));
-			Customer customer4 = new Customer("Maria Diaz", passwordEncoder.encode("24"));
+			Customer customer1 = new Customer("ninna@gmail.com", "Gianinna", "Márquez", passwordEncoder.encode("24"));
+			Customer customer2 = new Customer("pepito@gmail.com", "Pepito", "Pérez",passwordEncoder.encode("24"));
+			Customer customer3 = new Customer("carlitos@gmail.com", "Carlos", "Díaz",passwordEncoder.encode("24"));
+			Customer customer4 = new Customer("maria@gmail.com", "María", "Díaz",passwordEncoder.encode("24"));
 
 			customerRepository.save(customer2);
 			customerRepository.save(customer1);

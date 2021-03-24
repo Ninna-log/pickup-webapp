@@ -1,6 +1,8 @@
 var app = new Vue({
     el: '#app',
     data: {
+        userAuthenticated: null,
+        orders: [],
         username: "",
         password: "",
     },
@@ -19,9 +21,22 @@ var app = new Vue({
                 alert("Missing data")
             }
         },
-        showRegisterForm: function(){
-        $('.login_form').hide('toggle');
-          $('.signup_form').show('toggle');
-       },
+        getData: function () {
+                    fetch('/api/v1/orders')
+                        .then(function (res) {
+                            if (res.ok) {
+                                return res.json();
+                            }
+                            else {
+                                throw new error(res.status)
+                            }
+                        })
+                        .then(function (json) {
+                            app.orders = json;
+                            app.userAuthenticated = json.customer;
+                        })
+                },
     }
 });
+
+app.getData();

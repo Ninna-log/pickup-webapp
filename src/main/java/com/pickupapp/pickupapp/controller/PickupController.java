@@ -5,6 +5,8 @@ import com.pickupapp.pickupapp.repositories.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.authentication.AnonymousAuthenticationToken;
+import org.springframework.security.core.Authentication;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.web.bind.annotation.*;
 
@@ -67,20 +69,43 @@ public class PickupController {
     }
 
     @GetMapping("/orders")
-    public List<Map<String, Object>> getProducts(){
-        return orderRepository.findAll().stream().map(this::makeOrderDTO).collect(Collectors.toList());
+    public Map<String,Object> getProducts(Authentication authentication){
+        Map<String, Object> dto = new LinkedHashMap<String, Object>();
+
+        if(isGuest(authentication)){
+            dto.put("customer", null);
+        }
+        else{
+            Customer customer = customerRepository.findByUserName(authentication.getName());
+            dto.put("customer", makeCustomerDTO(customer));
+        }
+        dto.put("orders", orderRepository.findAll().stream().map(this::makeOrderDTO).collect(Collectors.toList()));
+        return dto;
     }
 
     private Map<String, Object> makeOrderDTO(Order order) {
         Map<String, Object> dto = new LinkedHashMap<String, Object>();
 
         dto.put("order_number", order.getId());
-        dto.put("client", order.getCustomer().getFirst_name() + order.getCustomer().getLast_name());
+        dto.put("first_name", order.getCustomer().getFirst_name());
+        dto.put("last_name", order.getCustomer().getLast_name());
         dto.put("total_products", order.getTotal_products());
         dto.put("total_price", order.getTotal_price());
         dto.put("arrival_time", order.getArrival_time());
         dto.put("pickup_date", order.getPickup_date());
         return dto;
+    }
+
+    private Map<String, Object> makeCustomerDTO(Customer customer) {
+        Map<String, Object> dto = new LinkedHashMap<String, Object>(); //
+        dto.put("id", customer.getId());
+        dto.put("first_name", customer.getFirst_name());
+        dto.put("last_name", customer.getLast_name());
+        return dto;
+    }
+
+    private boolean isGuest(Authentication authentication) {
+        return authentication == null || authentication instanceof AnonymousAuthenticationToken;
     }
 }
 

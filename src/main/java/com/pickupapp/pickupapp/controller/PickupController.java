@@ -30,6 +30,7 @@ public class PickupController {
 
     @GetMapping("/customers")
     public List<Customer> getCustomers(){
+
         return customerRepository.findAll();
     }
 
@@ -49,17 +50,16 @@ public class PickupController {
     }*/
 
     @PostMapping("/users")
-    public ResponseEntity<Object> register(@RequestParam String name, @RequestParam String password) {
+    public ResponseEntity<Object> register(@RequestParam String userName, @RequestParam String password) {
 
-        if (name.isEmpty() || password.isEmpty()) {
+        if (userName.isEmpty() || password.isEmpty()) {
             return new ResponseEntity<>(AppMessages.MSG_MISSING_DATA, HttpStatus.FORBIDDEN);
         }
 
-        if (customerRepository.findByUserName(name) != null) {
+        if (customerRepository.findByUserName(userName) != null) {
             return new ResponseEntity<>(AppMessages.MSG_NAME_ALREADY_USED, HttpStatus.FORBIDDEN);
         }
-
-        customerRepository.save(new Customer(name, passwordEncoder.encode(password)));
+        customerRepository.save(new Customer(userName, passwordEncoder.encode(password)));
         return new ResponseEntity<>(HttpStatus.CREATED);
     }
 
@@ -72,7 +72,7 @@ public class PickupController {
         Map<String, Object> dto = new LinkedHashMap<String, Object>();
 
         dto.put("order_number", order.getId());
-        dto.put("client", order.getCustomer().getName());
+        dto.put("client", order.getCustomer().getUserName());
         dto.put("total_products", order.getTotal_products());
         dto.put("total_price", order.getTotal_price());
         dto.put("arrival_time", order.getArrival_time());

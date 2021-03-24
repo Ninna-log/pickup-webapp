@@ -7,6 +7,6 @@ import org.springframework.data.rest.core.annotation.RepositoryRestResource;
 
 @RepositoryRestResource
 public interface CustomerRepository extends JpaRepository<Customer, Long> {
-    Customer findByUserName(@Param("name")String userName);
+    Customer findByUserName(@Param("userName")String userName);
 }
 

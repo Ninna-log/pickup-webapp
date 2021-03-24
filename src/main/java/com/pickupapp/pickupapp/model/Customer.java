@@ -3,6 +3,7 @@ package com.pickupapp.pickupapp.model;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import org.hibernate.annotations.GenericGenerator;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.crypto.password.PasswordEncoder;
 
 import javax.persistence.*;
 import java.util.HashSet;
@@ -19,7 +20,8 @@ public class Customer {
     @GeneratedValue(strategy = GenerationType.AUTO, generator = "native")
     @GenericGenerator(name = "native", strategy = "native")
     private Long id;
-    private String name;
+    private String userName;
+
     @Autowired
     private String password;
 
@@ -35,9 +37,8 @@ public class Customer {
 
     public Customer() {}
 
-    public Customer(String name, String password){
-
-        this.name = name;
+    public Customer(String userName, String password){
+        this.userName = userName;
         this.password = password;
     }
 
@@ -72,14 +73,14 @@ public class Customer {
         this.id = id;
     }
 
-    public String getName() {
+    public String getUserName() {
 
-        return name;
+        return userName;
     }
 
-    public void setName(String name) {
+    public void setUserName(String userName) {
 
-        this.name = name;
+        this.userName = userName;
     }
 
     public String getPassword() {
@@ -103,12 +104,12 @@ public class Customer {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         Customer customer = (Customer) o;
-        return name.equals(customer.name);
+        return id.equals(customer.id) &&
+                userName.equals(customer.userName);
     }
 
     @Override
     public int hashCode() {
-
-        return Objects.hash(name);
+        return Objects.hash(id, userName);
     }
 }

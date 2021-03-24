@@ -12,6 +12,10 @@ repositories {
 	mavenCentral()
 }
 
+bootRun {
+	sourceResources sourceSets.main //lo que hace es que no se tenga que inicializar otra vez la app para que se actualice los archivos static
+}
+
 dependencies {
 	implementation 'org.springframework.boot:spring-boot-starter-data-jpa'
 	implementation 'org.springframework.boot:spring-boot-starter-data-rest'
@@ -19,7 +23,6 @@ dependencies {
 	implementation 'org.springframework.boot:spring-boot-starter-web'
 	runtimeOnly 'com.h2database:h2'
 	testImplementation 'org.springframework.boot:spring-boot-starter-test'
-	testImplementation 'org.springframework.security:spring-security-test'
 }
 
 test {

@@ -8,7 +8,6 @@ import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.annotation.Bean;
 import org.springframework.security.crypto.password.PasswordEncoder;
-
 import java.time.LocalDate;
 import java.time.LocalTime;
 
@@ -25,14 +24,13 @@ public class PickupappApplication {
 
 	@Bean
 	public CommandLineRunner initData(CustomerRepository customerRepository, OrderRepository orderRepository,
-									  ProductRepository productRepository, CustomerProductRepository customerProductRepository,
-									  PasswordEncoder passwordEncoder) {
+									  ProductRepository productRepository, CustomerProductRepository customerProductRepository) {
 		return (args) -> {
 
-			Customer customer1 = new Customer("Gianinna Marquez", passwordEncoder.encode("123"));
-			Customer customer2 = new Customer("Pablo Perez", passwordEncoder.encode("123"));
-			Customer customer3 = new Customer("Pedro Perez", passwordEncoder.encode("123"));
-			Customer customer4 = new Customer("Maria Diaz", passwordEncoder.encode("123"));
+			Customer customer1 = new Customer("Gianinna Marquez", passwordEncoder.encode("24"));
+			Customer customer2 = new Customer("Pablo Perez", passwordEncoder.encode("24"));
+			Customer customer3 = new Customer("Pedro Perez", passwordEncoder.encode("24"));
+			Customer customer4 = new Customer("Maria Diaz", passwordEncoder.encode("24"));
 
 			customerRepository.save(customer2);
 			customerRepository.save(customer1);

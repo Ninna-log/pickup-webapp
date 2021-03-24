@@ -1,6 +1,5 @@
 package com.pickupapp.pickupapp.config;
 
-import com.pickupapp.pickupapp.repositories.CustomerRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -11,14 +10,13 @@ import org.springframework.security.crypto.factory.PasswordEncoderFactories;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.web.WebAttributes;
 import org.springframework.security.web.authentication.logout.HttpStatusReturningLogoutSuccessHandler;
-
+import com.pickupapp.pickupapp.repositories.CustomerRepository;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 @EnableWebSecurity
-@Configuration
-// tells Spring to create an instance of this class automatically. It can then be found and used by the security framework.
+@Configuration // tells Spring to create an instance of this class automatically. It can then be found and used by the security framework.
 public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 
     @Autowired
@@ -40,13 +38,10 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
     protected void configure(HttpSecurity http) throws Exception {
 
         http.headers().frameOptions().disable(); //<--- Para que se pueda ver la BD /h2-console
-        http.authorizeRequests()
-                .antMatchers("/web/**", "/api/**").permitAll()
-                .antMatchers("/rest/**").hasAnyAuthority("user")
-                .anyRequest().permitAll();
+        http.authorizeRequests().anyRequest().permitAll();
 
         http.formLogin()
-                .usernameParameter("name")
+                .usernameParameter("username")
                 .passwordParameter("password")
                 .loginPage("/api/login");
 

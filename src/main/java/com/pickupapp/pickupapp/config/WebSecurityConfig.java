@@ -16,7 +16,7 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 @EnableWebSecurity
-@Configuration // tells Spring to create an instance of this class automatically. It can then be found and used by the security framework.
+@Configuration
 public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 
     @Autowired
@@ -38,14 +38,18 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
     protected void configure(HttpSecurity http) throws Exception {
 
         http.headers().frameOptions().disable(); //<--- Para que se pueda ver la BD /h2-console
-        http.authorizeRequests().anyRequest().permitAll();
+        http.authorizeRequests()
+                .antMatchers("/web/pickup.html").hasAnyAuthority("USER")
+                .antMatchers("/web/**", "/api/**").permitAll()
+                .antMatchers("/rest/**").hasAnyAuthority("user")
+                .anyRequest().permitAll();
 
         http.formLogin()
                 .usernameParameter("username")
                 .passwordParameter("password")
-                .loginPage("/api/login");
+                .loginPage("/api/v1/login");
 
-        http.logout().logoutUrl("/api/logout");
+        http.logout().logoutUrl("/api/v1/logout");
 
         // turn off checking for CSRF tokens
         http.csrf().disable();

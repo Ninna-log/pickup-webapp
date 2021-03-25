@@ -8,11 +8,12 @@ var app = new Vue({
     },
     methods: {
         login: function () {
+
             if (app.username.length != 0 && app.password.length != 0) {
                 $.post("/api/v1/login", { username: app.username, password: app.password })
                     .done(function () {
                         alert("You're successfully logged in!")
-                        location.reload()
+                         location.replace("/web/products.html")
                     })
                     .fail(function () {
                         alert("Incorrect data")

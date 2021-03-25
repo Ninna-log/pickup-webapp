@@ -1,0 +1,86 @@
+@import url('https://fonts.googleapis.com/css2?family=Lato&display=swap');
+
+.container-fluid #navbar {
+    background-color: #F47320;
+    height: 200px;
+    color: #fff;
+}
+
+#navbar div:nth-child(1) div span,
+        div:nth-child(2) div span,
+        div:nth-child(3) div span,
+        div:nth-child(4) div span,
+        div:nth-child(5) div span,
+        div:nth-child(6) div span {
+    padding-top: 15px;
+}
+
+#navbar div:nth-child(7) button {
+    margin-top: 15px;
+}
+
+#navbar div:nth-child(7) img {
+    margin-top: -45px;
+}
+
+#navbar div:nth-child(7) button {
+    width: 100%;
+}
+
+#navbar div:nth-child(5) button {
+    width: 100%;
+    margin-top: 25px;
+}
+
+#navbar {
+    padding: 20px 20px;
+    font-family: 'Lato', sans-serif;
+    font-weight: 500;
+}
+
+#icon {
+    color: green !important;
+}
+
+
+
+.btn {
+     border: 1px solid rgb(231, 231, 231);
+     font-size: 0.9rem !important;
+     font-weight: bolder;
+     padding: 2px;
+     border-radius: 0px
+ }
+
+ .custom-select,
+ .btn:focus,
+ .btn:active {
+     outline: none !important;
+     box-shadow: none !important
+ }
+
+ .btn-outline-dark:hover {
+     color: #fff !important;
+     background-color: #2196F3 !important;
+     border-color: #fff !important
+ }
+
+ p {
+     font-size: 0.7em;
+     font-weight: 700
+ }
+
+ button {
+     padding: 13px 10px !important
+ }
+
+ .custom-select-lg {
+     border-radius: 0px;
+     height: 2rem;
+     font-size: 12px !important;
+     padding-right: 2.8rem
+ }
+
+ .menu-1 {
+     font-size: 14px
+ }

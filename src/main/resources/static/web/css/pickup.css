@@ -73,6 +73,7 @@ margin-right: 5px;
 color: black;
 background-color: #FFC312;
 width: 100px;
+z-index: 1;
 }
 
 .login_btn:hover{
@@ -98,4 +99,5 @@ margin-left: 4px;
 .remember, .login_form {
     margin-top: 40px;
 }
+
 

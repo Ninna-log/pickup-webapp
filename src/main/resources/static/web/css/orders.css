@@ -21,10 +21,12 @@
 
 #navbar div:nth-child(7) img {
     margin-top: -45px;
+    z-index: -1;
 }
 
 #navbar div:nth-child(7) button {
     width: 100%;
+    z-index: 1;
 }
 
 #navbar div:nth-child(5) button {

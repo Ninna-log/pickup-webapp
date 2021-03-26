@@ -1,29 +1,28 @@
-        function logout () {
-            $.post("/api/logout")
-                .done(function () {
-                    alert("You're successfully logged out")
-                    location.replace("pickup.html")
-                })
-                .fail(function () {
-                    alert("There's been an error. Please, try again")
-                })
-        }
+function logout() {
+    $.post("/api/logout")
+        .done(function () {
+            location.replace("pickup.html")
+        })
+        .fail(function () {
+            alert("Ha ocurrido un error, por favor pruebe otra vez")
+        })
+}
 
-        function getData () {
-            fetch('/api/v1/orders')
-                .then(function (res) {
-                    if (res.ok) {
-                        return res.json();
-                    }
-                    else {
-                        throw new error(res.status)
-                    }
-                })
-                .then(function (json) {
-                    app.orders = json;
-                    app.userAuthenticated = json.customer;
-                })
-        }
+function getData() {
+    fetch('/api/v1/orders')
+        .then(function (res) {
+            if (res.ok) {
+                return res.json();
+            }
+            else {
+                throw new error(res.status)
+            }
+        })
+        .then(function (json) {
+            app.orders = json;
+            app.userAuthenticated = json.customer;
+        })
+}
 
 if (document.readyState == 'loading') {
     document.addEventListener('DOMContentLoaded', ready)
@@ -53,8 +52,10 @@ function ready() {
     document.getElementsByClassName('btn-purchase')[0].addEventListener('click', purchaseClicked)
 }
 
-function purchaseClicked() {
-    alert('Thank you for your purchase')
+
+function purchaseClicked(title) {
+    alert('Gracias por su compra')
+    location.replace('/web/orders.html')
     var cartItems = document.getElementsByClassName('cart-items')[0]
     while (cartItems.hasChildNodes()) {
         cartItems.removeChild(cartItems.firstChild)
@@ -76,6 +77,7 @@ function quantityChanged(event) {
     updateCartTotal()
 }
 
+
 function addToCartClicked(event) {
     var button = event.target
     var shopItem = button.parentElement.parentElement
@@ -93,20 +95,20 @@ function addItemToCart(title, price, imageSrc) {
     var cartItemNames = cartItems.getElementsByClassName('cart-item-title')
     for (var i = 0; i < cartItemNames.length; i++) {
         if (cartItemNames[i].innerText == title) {
-            alert('This item is already added to the cart')
+            alert('Este artículo ya ha sido agregado')
             return
         }
     }
     var cartRowContents = `
-        <div class="cart-item cart-column">
-            <img class="cart-item-image" src="${imageSrc}" width="100" height="100">
-            <span class="cart-item-title">${title}</span>
-        </div>
-        <span class="cart-price cart-column">${price}</span>
-        <div class="cart-quantity cart-column">
-            <input class="cart-quantity-input" type="number" value="1">
-            <button class="btn btn-danger" type="button">REMOVE</button>
-        </div>`
+<div class="cart-item cart-column">
+    <img class="cart-item-image" src="${imageSrc}" width="100" height="100">
+    <span class="cart-item-title">${title}</span>
+</div>
+<span class="cart-price cart-column">${price}</span>
+<div class="cart-quantity cart-column">
+    <input class="cart-quantity-input" type="number" value="1">
+    <button class="btn btn-danger" type="button">Quitar</button>
+</div>`
     cartRow.innerHTML = cartRowContents
     cartItems.append(cartRow)
     cartRow.getElementsByClassName('btn-danger')[0].addEventListener('click', removeCartItem)

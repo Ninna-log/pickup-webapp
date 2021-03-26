@@ -57,7 +57,7 @@ public class PickupController {
                                            @RequestParam String last_name,
                                            @RequestParam String password) {
 
-        if (userName.isEmpty() || password.isEmpty()) {
+        if (userName.isEmpty() || password.isEmpty() || first_name.isEmpty() || last_name.isEmpty()) {
             return new ResponseEntity<>(AppMessages.MSG_MISSING_DATA, HttpStatus.FORBIDDEN);
         }
 

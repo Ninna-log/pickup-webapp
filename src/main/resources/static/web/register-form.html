@@ -8,7 +8,7 @@
 </head>
 <body>
 <div class="container" id="app">
-    <div class="d-flex justify-content-center h-100" v-if="userAuthenticated == null" id="login-form">
+    <div class="d-flex justify-content-center h-100" v-if="userAuthenticated == null">
         <div class="card">
             <div class="card-header">
                 <h3>Sign In</h3>
@@ -24,26 +24,30 @@
                         <div class="input-group-prepend">
                             <span class="input-group-text"><i class="fas fa-user"></i></span>
                         </div>
-                        <input type="text" class="form-control" v-model:value="username" placeholder="username" required>
+                        <input type="text" class="form-control" v-model:value="first_name" placeholder="Nombre" required>
+                    </div>
+                    <div class="input-group form-group">
+                        <div class="input-group-prepend">
+                            <span class="input-group-text"><i class="fas fa-user"></i></span>
+                        </div>
+                        <input type="text" class="form-control" v-model:value="last_name" placeholder="Apellido" required>
+                    </div>
+                    <div class="input-group form-group">
+                        <div class="input-group-prepend">
+                            <span class="input-group-text"><i class="far fa-envelope"></i></span>
+                        </div>
+                        <input type="text" class="form-control" v-model:value="username" placeholder="Email" required>
                     </div>
                     <div class="input-group form-group">
                         <div class="input-group-prepend">
                             <span class="input-group-text"><i class="fas fa-key"></i></span>
                         </div>
-                        <input type="password" class="form-control" v-model:value="password" placeholder="password" required>
-                    </div>
-                    <div class="row align-items-center remember">
-                        <input type="checkbox">Remember Me
+                        <input type="password" class="form-control" v-model:value="password" placeholder="Clave" required>
                     </div>
                     <div class="form-group">
-                        <button type="button" class="btn btn-warning" v-on:click="login" onclick="this.blur();">Ingresar</button>
+                        <button type="button" class="btn btn-warning" v-on:click="register" onclick="this.blur();">Ingresar</button>
                     </div>
                 </form>
-            </div>
-            <div class="card-footer">
-                <div class="d-flex justify-content-center links">
-                    Don't have an account?<a href="register-form.html">Sign Up</a>
-                </div>
             </div>
         </div>
         <div>

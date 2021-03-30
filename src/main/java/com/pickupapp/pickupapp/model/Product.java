@@ -2,8 +2,10 @@ package com.pickupapp.pickupapp.model;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import org.hibernate.annotations.GenericGenerator;
-
 import javax.persistence.*;
+import java.io.File;
+import java.nio.file.Path;
+import java.sql.Blob;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
@@ -20,6 +22,8 @@ public class Product {
     private Long id;
     private String product_name;
     private Double price;
+    private String category;
+    private String photo;
 
     @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "customer_id")
@@ -31,10 +35,11 @@ public class Product {
 
     public Product (){}
 
-    public Product(String product_name, Double price, Customer customer) {
+    public Product(String product_name, Double price, String category, String photo) {
         this.product_name = product_name;
         this.price = price;
-        this.customer = customer;
+        this.category = category;
+        this.photo = photo;
     }
 
     @JsonIgnore
@@ -80,13 +85,27 @@ public class Product {
         this.price = price;
     }
 
-    public String getName() {
-
+    public String getProduct_name() {
         return product_name;
     }
 
-    public void setName(String product_name) {
-
+    public void setProduct_name(String product_name) {
         this.product_name = product_name;
+    }
+
+    public String getCategory() {
+        return category;
+    }
+
+    public void setCategory(String category) {
+        this.category = category;
+    }
+
+    public String getPhoto() {
+        return photo;
+    }
+
+    public void setPhoto(String photo) {
+        this.photo = photo;
     }
 }

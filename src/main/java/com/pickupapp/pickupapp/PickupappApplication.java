@@ -8,6 +8,13 @@ import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.annotation.Bean;
 import org.springframework.security.crypto.password.PasswordEncoder;
+
+import javax.swing.*;
+import javax.xml.xpath.XPath;
+import java.io.File;
+import java.nio.file.Path;
+import java.nio.file.Paths;
+import java.sql.Blob;
 import java.time.LocalDate;
 import java.time.LocalTime;
 
@@ -51,27 +58,54 @@ public class PickupappApplication {
 			orderRepository.save(order4);
 			orderRepository.save(order5);
 
-			Product product1 = new Product("Chocolate", 300.00, customer1);
-			Product product2 = new Product("Helado", 400.00, customer2);
-			Product product3 = new Product("Harina", 180.00, customer3);
-			Product product4 = new Product("Gaseosa", 190.00, customer4);
+			Path image1 = new Photo(Path.of("resources/static/web/img/leche_largavida_clasica.png"));
+			Path image2 = Path.of("https://www.laserenisima.com.ar/images/productos/3292846grandes4.png");
+			Path image3 = Path.of("https://www.laserenisima.com.ar/images/productos/grandessensecaramel.png");
+			Path image4 = Path.of("https://www.laserenisima.com.ar/images/productos/6103210grandes2.png");
+			Path image5 = Path.of("https://www.laserenisima.com.ar/images/productos/grandeColonial.png");
+			Path image6 = Path.of("https://www.laserenisima.com.ar/images/productos/Clasico_grande.png");
+			Path image7 = Path.of("https://www.laserenisima.com.ar/images/productos/869445grande.png");
+			Path image8 = Path.of("https://www.laserenisima.com.ar/images/productos/3807373grande.png");
+
+
+			Product product1 = new Product("Leche Larga Vida 3% Clásica La Serenísima 1L", 160.00, "Lacteos", image1);
+			Product product2 = new Product("Yogur Yogurísimo Firme La Serenísima x1 Frutilla", 120.00, "Lacteos", image2);
+			Product product3 = new Product("Bebida Láctea Sense Caramel La Serenísima 1L", 180.00, "Lacteos", image3);
+			Product product4 = new Product("Leche Reducida en Lactosa La Serenísima 1L", 190.00, "Lacteos", image4);
+			Product product5 = new Product("Dulce de Leche Colonial La Serenísima 400g", 195.00, "Lacteos", image5);
+			Product product6 = new Product("Dulce de Leche Clásico La Serenísima 400g", 190.00, "Lacteos", image6);
+			Product product7 = new Product("Finlandia Chef Hebras 4 quesos 130g", 220.00, "Lacteos", image7);
+			Product product8 = new Product("Finlandia Chef Fetas Danbo 150g", 210.00, "Lacteos", image8);
+
 
 			productRepository.save(product1);
 			productRepository.save(product2);
 			productRepository.save(product3);
 			productRepository.save(product4);
+			productRepository.save(product5);
+			productRepository.save(product6);
+			productRepository.save(product7);
+			productRepository.save(product8);
 
 			CustomerProduct customerProduct1 = new CustomerProduct(customer1, product1, order1);
 			CustomerProduct customerProduct2 = new CustomerProduct(customer2, product2, order2);
 			CustomerProduct customerProduct3 = new CustomerProduct(customer2, product3, order3);
 			CustomerProduct customerProduct4 = new CustomerProduct(customer3, product4, order4);
 			CustomerProduct customerProduct5 = new CustomerProduct(customer5, product4, order5);
+			CustomerProduct customerProduct6 = new CustomerProduct(customer1, product5, order1);
+			CustomerProduct customerProduct7 = new CustomerProduct(customer2, product6, order2);
+			CustomerProduct customerProduct8 = new CustomerProduct(customer2, product7, order3);
+			CustomerProduct customerProduct9 = new CustomerProduct(customer2, product8, order3);
 
 			customerProductRepository.save(customerProduct1);
 			customerProductRepository.save(customerProduct2);
 			customerProductRepository.save(customerProduct3);
 			customerProductRepository.save(customerProduct4);
 			customerProductRepository.save(customerProduct5);
+			customerProductRepository.save(customerProduct6);
+			customerProductRepository.save(customerProduct7);
+			customerProductRepository.save(customerProduct8);
+			customerProductRepository.save(customerProduct9);
 
 		};
 	}

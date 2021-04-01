@@ -23,6 +23,7 @@ public class Product {
     private String product_name;
     private Double price;
     private String category;
+    @Column(nullable = true, length = 64)
     private String photo;
 
     @ManyToOne(fetch = FetchType.EAGER)

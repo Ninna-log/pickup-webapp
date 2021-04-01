@@ -33,4 +33,6 @@ public final class AppMessages {
     public static final String CANT_FIRE = "You can't fire now";
 
     public static final String SALVOES_ADDED = "Salvoes successfully added";
+
+    public static final String PRODUCT_ADDED = "Product successfully added";
 }

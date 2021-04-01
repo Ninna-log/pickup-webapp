@@ -8,11 +8,11 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.security.authentication.AnonymousAuthenticationToken;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.crypto.password.PasswordEncoder;
+import org.springframework.util.StringUtils;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.multipart.MultipartFile;
 
-import java.util.LinkedHashMap;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 import java.util.stream.Collectors;
 
 @RestController
@@ -83,6 +83,20 @@ public class PickupController {
         return dto;
     }
 
+    @PostMapping("/products/save")
+    public ResponseEntity<Object> savingProducts(@RequestParam("image") MultipartFile multipartFile,
+                                                 @RequestParam String product_name,
+                                                 @RequestParam Double price,
+                                                 @RequestParam String category){
+        String photo = StringUtils.cleanPath(Objects.requireNonNull(multipartFile.getOriginalFilename()));
+        if (photo.isEmpty() || product_name.isEmpty() || price.isNaN() || category.isEmpty()){
+            return new ResponseEntity<>(makeMap(AppMessages.KEY_ERROR, AppMessages.NOT_ALLOWED), HttpStatus.NOT_ACCEPTABLE);
+        }else{
+            productRepository.save(new Product(product_name, price, category, photo));
+            return new ResponseEntity<>(makeMap(AppMessages.KEY_SUCCESS, AppMessages.PRODUCT_ADDED), HttpStatus.OK);
+        }
+    }
+
     private Map<String, Object> makeOrderDTO(Order order) {
         Map<String, Object> dto = new LinkedHashMap<String, Object>();
 
@@ -106,6 +120,12 @@ public class PickupController {
 
     private boolean isGuest(Authentication authentication) {
         return authentication == null || authentication instanceof AnonymousAuthenticationToken;
+    }
+
+    private Map<String, Object> makeMap(String key, Object value) {
+        Map<String, Object> map = new HashMap<>();
+        map.put(key, value);
+        return map;
     }
 }
 

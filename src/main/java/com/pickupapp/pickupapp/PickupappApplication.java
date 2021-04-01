@@ -8,13 +8,6 @@ import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.annotation.Bean;
 import org.springframework.security.crypto.password.PasswordEncoder;
-
-import javax.swing.*;
-import javax.xml.xpath.XPath;
-import java.io.File;
-import java.nio.file.Path;
-import java.nio.file.Paths;
-import java.sql.Blob;
 import java.time.LocalDate;
 import java.time.LocalTime;
 
@@ -58,23 +51,15 @@ public class PickupappApplication {
 			orderRepository.save(order4);
 			orderRepository.save(order5);
 
-			Path image1 = new Photo(Path.of("resources/static/web/img/leche_largavida_clasica.png"));
-			Path image2 = Path.of("https://www.laserenisima.com.ar/images/productos/3292846grandes4.png");
-			Path image3 = Path.of("https://www.laserenisima.com.ar/images/productos/grandessensecaramel.png");
-			Path image4 = Path.of("https://www.laserenisima.com.ar/images/productos/6103210grandes2.png");
-			Path image5 = Path.of("https://www.laserenisima.com.ar/images/productos/grandeColonial.png");
-			Path image6 = Path.of("https://www.laserenisima.com.ar/images/productos/Clasico_grande.png");
 
-
-
-			Product product1 = new Product("Leche Larga Vida 3% Clásica La Serenísima 1L", 160.00, "Lacteos", image1);
-			Product product2 = new Product("Yogur Yogurísimo Firme La Serenísima x1 Frutilla", 120.00, "Lacteos", image2);
-			Product product3 = new Product("Bebida Láctea Sense Caramel La Serenísima 1L", 180.00, "Lacteos", image3);
-			Product product4 = new Product("Leche Reducida en Lactosa La Serenísima 1L", 190.00, "Lacteos", image4);
-			Product product5 = new Product("Dulce de Leche Colonial La Serenísima 400g", 195.00, "Lacteos", image5);
-			Product product6 = new Product("Dulce de Leche Clásico La Serenísima 400g", 190.00, "Lacteos", image6);
-			Product product7 = new Product("Finlandia Chef Hebras 4 quesos 130g", 220.00, "Lacteos", image7);
-			Product product8 = new Product("Finlandia Chef Fetas Danbo 150g", 210.00, "Lacteos", image8);
+			Product product1 = new Product("Leche Larga Vida 3% Clásica La Serenísima 1L", 160.00, "Lacteos", "image/png");
+			Product product2 = new Product("Yogur Yogurísimo Firme La Serenísima x1 Frutilla", 120.00, "Lacteos", "image/png");
+			Product product3 = new Product("Bebida Láctea Sense Caramel La Serenísima 1L", 180.00, "Lacteos", "image/png");
+			Product product4 = new Product("Leche Reducida en Lactosa La Serenísima 1L", 190.00, "Lacteos", "image/png");
+			Product product5 = new Product("Dulce de Leche Colonial La Serenísima 400g", 195.00, "Lacteos", "image/png");
+			Product product6 = new Product("Dulce de Leche Clásico La Serenísima 400g", 190.00, "Lacteos", "image/png");
+			Product product7 = new Product("Finlandia Chef Hebras 4 quesos 130g", 220.00, "Lacteos", "image/png");
+			Product product8 = new Product("Finlandia Chef Fetas Danbo 150g", 210.00, "Lacteos", "image/png");
 
 
 			productRepository.save(product1);

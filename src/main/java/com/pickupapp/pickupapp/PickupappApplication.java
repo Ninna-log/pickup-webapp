@@ -64,8 +64,7 @@ public class PickupappApplication {
 			Path image4 = Path.of("https://www.laserenisima.com.ar/images/productos/6103210grandes2.png");
 			Path image5 = Path.of("https://www.laserenisima.com.ar/images/productos/grandeColonial.png");
 			Path image6 = Path.of("https://www.laserenisima.com.ar/images/productos/Clasico_grande.png");
-			Path image7 = Path.of("https://www.laserenisima.com.ar/images/productos/869445grande.png");
-			Path image8 = Path.of("https://www.laserenisima.com.ar/images/productos/3807373grande.png");
+
 
 
 			Product product1 = new Product("Leche Larga Vida 3% Clásica La Serenísima 1L", 160.00, "Lacteos", image1);

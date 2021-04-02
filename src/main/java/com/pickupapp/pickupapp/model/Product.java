@@ -3,9 +3,6 @@ package com.pickupapp.pickupapp.model;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import org.hibernate.annotations.GenericGenerator;
 import javax.persistence.*;
-import java.io.File;
-import java.nio.file.Path;
-import java.sql.Blob;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
@@ -41,6 +38,13 @@ public class Product {
         this.price = price;
         this.category = category;
         this.photo = photo;
+    }
+
+    @Transient
+    public String getPhotosImagePath() {
+        if (photo == null || id == null) return null;
+
+        return "/user-photos/" + id + "/" + photo;
     }
 
     @JsonIgnore

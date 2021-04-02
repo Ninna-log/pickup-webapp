@@ -11,7 +11,9 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.util.StringUtils;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
+import org.springframework.web.servlet.view.RedirectView;
 
+import java.io.IOException;
 import java.util.*;
 import java.util.stream.Collectors;
 
@@ -83,18 +85,25 @@ public class PickupController {
         return dto;
     }
 
+
+
     @PostMapping("/products/save")
-    public ResponseEntity<Object> savingProducts(@RequestParam("image") MultipartFile multipartFile,
-                                                 @RequestParam String product_name,
-                                                 @RequestParam Double price,
-                                                 @RequestParam String category){
-        String photo = StringUtils.cleanPath(Objects.requireNonNull(multipartFile.getOriginalFilename()));
-        if (photo.isEmpty() || product_name.isEmpty() || price.isNaN() || category.isEmpty()){
-            return new ResponseEntity<>(makeMap(AppMessages.KEY_ERROR, AppMessages.NOT_ALLOWED), HttpStatus.NOT_ACCEPTABLE);
-        }else{
-            productRepository.save(new Product(product_name, price, category, photo));
-            return new ResponseEntity<>(makeMap(AppMessages.KEY_SUCCESS, AppMessages.PRODUCT_ADDED), HttpStatus.OK);
-        }
+    public RedirectView savingProduct(@RequestParam String product_name,
+                                      @RequestParam String category,
+                                      @RequestParam Double price,
+                                      @RequestParam("image") MultipartFile multipartFile) throws IOException {
+
+        String fileName = StringUtils.cleanPath(multipartFile.getOriginalFilename());
+
+        Product product = new Product(product_name, price, category, fileName);
+
+        Product savedProduct = productRepository.save(product);
+
+        String uploadDir = "product-photos/" + savedProduct.getId();
+
+        FileUploadUtil.saveFile(uploadDir, fileName, multipartFile);
+
+        return new RedirectView("/products", true);
     }
 
     private Map<String, Object> makeOrderDTO(Order order) {

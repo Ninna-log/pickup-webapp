@@ -86,7 +86,7 @@ public class PickupController {
     }
 
     @PostMapping("/products/save")
-    public RedirectView savingProduct(@RequestParam String product_name,
+    public RedirectView creatingProduct(@RequestParam String product_name,
                                       @RequestParam String category,
                                       @RequestParam Double price,
                                       @RequestParam("image") MultipartFile multipartFile) throws IOException {

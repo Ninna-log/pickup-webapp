@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml" xmlns:v-model="http://www.w3.org/1999/xhtml"
+      xmlns:v-on="http://www.w3.org/1999/xhtml">
+    <head>
+        <meta charset="UTF-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>Saving Products</title>
+    </head>
+    <body>
+        <div id="app">
+            <form th:action="@{/products/save}" th:object="${product}" method="post" enctype="multipart/form-data">
+
+                <div>
+                    <label>Photo: </label>
+                    <input type="file" name="image" id="file" ref="file" v-on:change="handleFileUpload()" accept="image/png, image/jpeg"/>
+                    <label>Name: </label>
+                    <input type="text" v-model:value="name" name="name"/>
+                    <label>Category: </label>
+                    <input type="text" name="category" v-model:value="category"/>
+                    <label>Price: </label>
+                    <input type="number" name="price" v-model:value="price"/>
+                </div>
+
+            </form>
+            <button type="button" v-on:click="submitProduct" onclick="this.blur();">Submit</button>
+        </div>
+
+        <script src="https://cdn.jsdelivr.net/npm/vue@2/dist/vue.js"></script>
+        <script src="https://code.jquery.com/jquery-3.5.1.min.js"
+                integrity="sha256-9/aliU8dGd2tb6OSsuzixeV4y/faTqgFtohetphbbj0=" crossorigin="anonymous"></script>
+        <script src="script/products-form.js"></script>
+    </body>
+</html>

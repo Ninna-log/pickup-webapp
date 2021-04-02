@@ -85,8 +85,6 @@ public class PickupController {
         return dto;
     }
 
-
-
     @PostMapping("/products/save")
     public RedirectView savingProduct(@RequestParam String product_name,
                                       @RequestParam String category,

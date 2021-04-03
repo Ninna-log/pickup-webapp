@@ -16,7 +16,7 @@ var app = new Vue({
             form.append("image", this.file);
 
             var settings = {
-              "url": "/api/v1/products/save",
+              "url": "/api/v1/products/save?product_name="+app.name+"&"+"category="+app.category+"&"+"price="+app.price,
               "method": "POST",
               "timeout": 0,
               "processData": false,

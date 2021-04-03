@@ -12,13 +12,25 @@ var app = new Vue({
             app.file = this.file;
         },
         submitProduct: function() {
-            $.post("/api/v1/products/save", { product_name: app.name, price: app.price, category: app.category, photo: app.file })
-                .done(function (response) {
-                    alert("Product added");
-                })
-                .fail(function (error) {
-                    alert(JSON.parse(error.responseText).error);
-                })
+            let form = new FormData();
+            form.append("image", this.file);
+
+            var settings = {
+              "url": "/api/v1/products/save",
+              "method": "POST",
+              "timeout": 0,
+              "processData": false,
+              "mimeType": "multipart/form-data",
+              "contentType": false,
+              "data": form
+            };
+
+            $.ajax(settings).done(function (response) {
+              console.log('SUCCESS');
+            })
+            .fail(function (response) {
+              console.log('FAILURE');
+            });
         }
     }
 });

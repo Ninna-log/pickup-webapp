@@ -87,9 +87,9 @@ public class PickupController {
 
     @PostMapping("/products/save")
     public RedirectView creatingProduct(@RequestParam String product_name,
-                                      @RequestParam String category,
-                                      @RequestParam Double price,
-                                      @RequestParam("image") MultipartFile multipartFile) throws IOException {
+                                        @RequestParam String category,
+                                        @RequestParam Double price,
+                                        @RequestParam("image") MultipartFile multipartFile) throws IOException {
 
         String fileName = StringUtils.cleanPath(multipartFile.getOriginalFilename());
 

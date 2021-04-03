@@ -93,6 +93,7 @@ public class PickupappApplication {
 			productRepository.save(product18);
 			productRepository.save(product19);
 
+
 			CustomerProduct customerProduct1 = new CustomerProduct(customer1, product1, order1);
 			CustomerProduct customerProduct2 = new CustomerProduct(customer2, product2, order2);
 			CustomerProduct customerProduct3 = new CustomerProduct(customer2, product3, order3);

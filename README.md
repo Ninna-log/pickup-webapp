@@ -1,4 +1,4 @@
-# pickup-webapp
+# 🛒💰 pickup-webapp
 This is a demo for an e-commerce called Pickup App
 
 Projects Features:
